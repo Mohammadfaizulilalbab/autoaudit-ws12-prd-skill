@@ -42,3 +42,12 @@ Selesai ketika kamu menilai aplikasi sudah memenuhi dokumen. Pesan terakhirmu be
 ## Iterasi agent
 
 Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang berubah, masalah, dan hasil build/test.
+
+### Iterasi 1: Analisis dokumen dan setup proyek
+
+- Mulai: 2026-11-20 22:02
+- Selesai: 2026-11-20 22:05
+- Tujuan: membaca AGENTS.md, PRD, UX-SPEC, DESIGN-SYSTEM, INTERACTION-SPEC, ACCEPTANCE-CRITERIA; menulis rencana, konflik, dan keputusan di DECISIONS.md; menyiapkan Vite + React 18 + TypeScript strict + Vitest.
+- File berubah: DECISIONS.md, package.json, package-lock.json, tsconfig.json, vite.config.ts, index.html, src/main.tsx, src/tests/setup.ts
+- Masalah: tipe @types/diff tidak memuat opsi `timeout`, jadi batas kinerja diff memakai `maxEditLength` (dicatat D-14). Script build memakai `tsc --noEmit && vite build` karena hanya ada satu tsconfig.
+- Hasil build/test: `npm run build` berhasil. Belum ada test.
