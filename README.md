@@ -36,6 +36,20 @@ Histori commit di branch `main` mengikuti iterasi agent. Waktu kerja dan setiap 
 
 Eksperimen A dan B memakai AI yang sama, yaitu Claude Code dengan model Claude Opus 5.5, dalam dua sesi agent terpisah. Prompt keduanya hanya berbeda pada dokumen yang boleh dibaca. Agent bekerja tanpa bisa bertanya, mencatat setiap iterasi, dan commit sendiri. Peneliti hanya menulis dokumen, menjalankan agent, memverifikasi build dan test, lalu men-deploy hasilnya ke GitHub Pages.
 
+## Hasil evaluasi
+
+Kedua situs diuji oleh agent evaluator terpisah dengan checklist yang sama, berdasarkan PRD yang sama. Detail bukti per butir ada di `EVALUASI.md`.
+
+| Kelompok | A: PRD Only | B: PRD + Skill |
+|---|---|---|
+| Kriteria penerimaan PRD (lulus dari 11) | 11 | 11 |
+| Kelengkapan fitur (dari 6) | 6 | 5,5 |
+| Kesesuaian UX (dari 8) | 7,5 | 8 |
+| Konsistensi desain (dari 6) | 5,5 | 6 |
+| Test otomatis yang lolos | 11 | 65 |
+| Prompt revisi dari peneliti | 0 | 0 |
+| Waktu kerja aktif agent | sekitar 18 menit | sekitar 25 menit |
+
 ## Menjalankan di komputer sendiri
 
 Butuh Node.js 20 atau lebih baru.
