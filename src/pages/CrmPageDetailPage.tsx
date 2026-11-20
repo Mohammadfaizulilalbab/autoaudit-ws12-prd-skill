@@ -18,6 +18,7 @@ import { NotFound } from './NotFound';
 interface PendingUpload {
   version: DashboardVersion;
   file: UploadedFile;
+  trigger: HTMLButtonElement | null;
 }
 
 /** PAGE-02 Detail CRM Page dengan alur Upload (INTERACTION-SPEC 3). */
@@ -32,7 +33,7 @@ export function CrmPageDetailPage() {
   const versions = versionsOfPage(data, page.id);
   const client = clientName(data, page.clientId);
 
-  const handleFileSelected = async (version: DashboardVersion, file: File) => {
+  const handleFileSelected = async (version: DashboardVersion, file: File, trigger: HTMLButtonElement | null) => {
     if (!hasDashboardExtension(file.name)) {
       toast('error', EXTENSION_ERROR);
       return;
@@ -53,7 +54,7 @@ export function CrmPageDetailPage() {
       toast('info', sameFileMessage(versionLabel(version.number)));
       return;
     }
-    setPending({ version, file: { fileName: file.name, fileSize: file.size, fileContent: content } });
+    setPending({ version, file: { fileName: file.name, fileSize: file.size, fileContent: content }, trigger });
   };
 
   const confirm = (): boolean => {
@@ -87,6 +88,7 @@ export function CrmPageDetailPage() {
           next={pending.file}
           onConfirm={confirm}
           onCancel={cancel}
+          returnFocusTo={pending.trigger}
         />
       )}
       {pending && pending.version.status !== 'Published' && (
@@ -98,6 +100,7 @@ export function CrmPageDetailPage() {
           next={pending.file}
           onConfirm={confirm}
           onCancel={cancel}
+          returnFocusTo={pending.trigger}
         />
       )}
     </>

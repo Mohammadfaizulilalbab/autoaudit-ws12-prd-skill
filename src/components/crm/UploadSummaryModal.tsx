@@ -11,15 +11,17 @@ interface UploadSummaryModalProps {
   next: FileInfo;
   onConfirm: () => boolean;
   onCancel: () => void;
+  returnFocusTo?: HTMLElement | null;
 }
 
 /** MODAL-01 Ringkasan Upload untuk versi Draft atau Archived. */
-export function UploadSummaryModal({ pageName, versionText, status, current, next, onConfirm, onCancel }: UploadSummaryModalProps) {
+export function UploadSummaryModal({ pageName, versionText, status, current, next, onConfirm, onCancel, returnFocusTo }: UploadSummaryModalProps) {
   const { busy, run } = useSingleSubmit(onConfirm);
   return (
     <Modal
       title={`Ganti file ${versionText}?`}
       onClose={onCancel}
+      returnFocusTo={returnFocusTo}
       actions={
         <>
           <Button onClick={onCancel}>Batal</Button>

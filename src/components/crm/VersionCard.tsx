@@ -8,7 +8,7 @@ import { StatusBadge } from '../common/StatusBadge';
 
 interface VersionCardProps {
   version: DashboardVersion;
-  onFileSelected: (version: DashboardVersion, file: File) => void;
+  onFileSelected: (version: DashboardVersion, file: File, trigger: HTMLButtonElement | null) => void;
 }
 
 export function VersionCard({ version, onFileSelected }: VersionCardProps) {
@@ -20,9 +20,8 @@ export function VersionCard({ version, onFileSelected }: VersionCardProps) {
     const file = e.target.files?.[0];
     // Kosongkan agar file yang sama bisa dipilih lagi; batal memilih file tidak melakukan apa pun.
     e.target.value = '';
-    // Pastikan tombol Upload yang fokus, agar modal mengembalikan fokus ke sini saat ditutup.
-    uploadButtonRef.current?.focus();
-    if (file) onFileSelected(version, file);
+    // Tombol Upload menjadi tujuan fokus saat modal ringkasan ditutup.
+    if (file) onFileSelected(version, file, uploadButtonRef.current);
   };
 
   return (

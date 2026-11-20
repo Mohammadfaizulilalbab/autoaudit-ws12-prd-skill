@@ -14,10 +14,11 @@ interface PublishedConfirmModalProps {
   next: FileInfo;
   onConfirm: () => boolean;
   onCancel: () => void;
+  returnFocusTo?: HTMLElement | null;
 }
 
 /** MODAL-02 Ganti versi tayang: dipakai untuk Upload dan pengembalian revisi pada versi Published. */
-export function PublishedConfirmModal({ pageName, clientName, versionNumber, current, next, onConfirm, onCancel }: PublishedConfirmModalProps) {
+export function PublishedConfirmModal({ pageName, clientName, versionNumber, current, next, onConfirm, onCancel, returnFocusTo }: PublishedConfirmModalProps) {
   // Modal selalu dipasang baru saat dibuka, jadi input selalu kosong di awal.
   const [typed, setTyped] = useState('');
   const inputId = useId();
@@ -34,6 +35,7 @@ export function PublishedConfirmModal({ pageName, clientName, versionNumber, cur
     <Modal
       title="Ganti versi yang sedang tayang?"
       onClose={onCancel}
+      returnFocusTo={returnFocusTo}
       actions={
         <>
           <Button onClick={onCancel}>Batal</Button>

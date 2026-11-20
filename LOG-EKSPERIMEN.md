@@ -79,3 +79,12 @@ Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang b
 - File berubah: src/App.tsx, src/main.tsx, src/styles/{tokens,global}.css, src/store/StoreContext.tsx, src/utils/file.ts, src/components/{common,layout,crm,prompts,history}/*, src/pages/*
 - Masalah: (1) tombol menu dan tutup drawer tampil di desktop karena aturan `.btn` menimpa `display:none`; diperbaiki dengan selector lebih spesifik. (2) Modal di dalam sidebar ber-transform akan terkurung di drawer; Modal dirender lewat portal ke body. (3) Fokus tidak kembali ke tombol Upload bila fokus hilang saat dialog file; tombol Upload difokuskan ulang saat file dipilih. (4) `.claude/launch.json` diminta di luar folder kerja, jadi dev server dijalankan manual di port 5182. Diperiksa di browser: Upload v4 Published dengan " V4 " + Enter, pengembalian revisi #1 v4 lewat MODAL-02, Esc menutup modal dan fokus kembali, isi `<script>` tampil sebagai teks tanpa alert, drawer dan modal di 360px, tabel prompt jadi kartu, tanpa scroll horizontal di 360/768/1024px.
 - Hasil build/test: `npm run build` berhasil; `npm test` 32 test lulus (test UI ditulis di iterasi berikutnya).
+
+### Iterasi 4: Test alur UI sesuai ACCEPTANCE-CRITERIA
+
+- Mulai: 2026-11-21 02:28
+- Selesai: 2026-11-21 02:30
+- Tujuan: menulis test otomatis Testing Library untuk alur Upload (ringkasan, batal, Esc, konfirmasi, validasi file, file sama, MODAL-02), simpan prompt (validasi, toast audit, tidak ada perubahan, gagal tulis), riwayat (daftar, isi, perbandingan, pengembalian prompt/Draft/Published, isi script sebagai teks, nomor revisi per objek), data contoh, data rusak, navigasi, dan atur ulang.
+- File berubah: src/tests/flows.test.tsx, src/components/common/Modal.tsx, src/components/crm/{VersionCard,UploadSummaryModal,PublishedConfirmModal}.tsx, src/pages/CrmPageDetailPage.tsx
+- Masalah: test AC-035 menemukan fokus kembali ke input file tersembunyi, bukan ke tombol Upload, karena urutan fokus saat memilih file tidak bisa diandalkan. Modal kini menerima tujuan fokus eksplisit (`returnFocusTo`) dan alur Upload mengirim tombol Upload. Satu test salah selector (nama CRM Page tampil di dua kolom) diperbaiki.
+- Hasil build/test: `npm run build` berhasil; `npm test` 65 test lulus (2 file). Tidak ada hex di luar tokens.css, tidak ada innerHTML/dangerouslySetInnerHTML/iframe.

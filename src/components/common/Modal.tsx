@@ -6,23 +6,26 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   actions: ReactNode;
+  /** Elemen yang menerima fokus saat modal ditutup; bawaan: elemen yang fokus saat modal dibuka. */
+  returnFocusTo?: HTMLElement | null;
 }
 
 const FOCUSABLE = 'button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), a[href], [tabindex]:not([tabindex="-1"])';
 
 /** Dialog dasar: fokus terkunci di dalam, Esc menutup, fokus kembali ke tombol pemicu (DESIGN-SYSTEM 10.3). */
-export function Modal({ title, onClose, children, actions }: ModalProps) {
+export function Modal({ title, onClose, children, actions, returnFocusTo }: ModalProps) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const trigger = document.activeElement as HTMLElement | null;
+    const trigger = returnFocusTo ?? (document.activeElement as HTMLElement | null);
     const dialog = dialogRef.current;
     const initial = dialog?.querySelector<HTMLElement>('[data-autofocus]') ?? dialog?.querySelector<HTMLElement>(FOCUSABLE);
     initial?.focus();
     return () => {
       if (trigger && trigger !== document.body && trigger.isConnected) trigger.focus();
     };
+    // Hanya dijalankan saat modal dibuka dan ditutup.
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent) => {
