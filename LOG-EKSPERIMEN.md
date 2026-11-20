@@ -51,3 +51,12 @@ Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang b
 - File berubah: DECISIONS.md, package.json, package-lock.json, tsconfig.json, vite.config.ts, index.html, src/main.tsx, src/tests/setup.ts
 - Masalah: tipe @types/diff tidak memuat opsi `timeout`, jadi batas kinerja diff memakai `maxEditLength` (dicatat D-14). Script build memakai `tsc --noEmit && vite build` karena hanya ada satu tsconfig.
 - Hasil build/test: `npm run build` berhasil. Belum ada test.
+
+### Iterasi 2: Model data, data contoh, penyimpanan, dan logika murni
+
+- Mulai: 2026-11-20 22:05
+- Selesai: 2026-11-20 22:07
+- Tujuan: menulis model data (INTERACTION-SPEC 11.2), data contoh (11.3), baca/tulis localStorage dengan try/catch, aksi murni (upload, simpan prompt, kembalikan revisi), selector, validasi, format, diff, dan teks pesan, beserta unit test.
+- File berubah: src/types/index.ts, src/store/{seed,storage,actions,selectors}.ts, src/utils/{format,validation,diff,messages}.ts, src/tests/logic.test.ts
+- Masalah: perlu memastikan diff 500 KB tetap cepat untuk file yang sangat berbeda; dipakai `maxEditLength` dengan fallback semua baris ditandai (D-14). Test kinerja lulus. Pemeriksaan tsc pertama gagal karena narrowing tipe snapshot di test; diperbaiki dengan helper bertipe sebelum commit di-amend.
+- Hasil build/test: `npx tsc --noEmit` tanpa error; `vitest run` 32 test lulus.
