@@ -39,6 +39,16 @@ Aturan eksperimen (sama untuk semua peserta):
 Selesai ketika kamu menilai aplikasi sudah memenuhi dokumen. Pesan terakhirmu berisi: ringkasan yang dibangun, perintah untuk menjalankan, hasil build dan test terakhir, serta hal yang belum selesai.
 ```
 
+### Jeda karena batas pemakaian
+
+Agent berhenti sekitar 2026-11-20 22:12 WIB karena batas pemakaian API (HTTP 429). Hal yang sama terjadi pada Eksperimen A dan B pada waktu yang sama. Agent dilanjutkan 2026-11-21 02:22 WIB dengan pesan yang sama untuk A dan B:
+
+```text
+Lanjutkan pekerjaanmu dari titik terakhir. Pengerjaan sempat terhenti sekitar 22:12 WIB karena batas pemakaian API, bukan karena kesalahanmu. Aturan eksperimen tetap sama. Periksa keadaan folder (git status dan LOG-EKSPERIMEN.md) dulu, lalu lanjutkan sampai selesai.
+```
+
+Jeda ini tidak dihitung sebagai waktu pengembangan dan tidak dihitung sebagai revisi.
+
 ## Iterasi agent
 
 Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang berubah, masalah, dan hasil build/test.
