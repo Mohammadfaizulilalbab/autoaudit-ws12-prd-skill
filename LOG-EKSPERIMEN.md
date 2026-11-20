@@ -88,3 +88,12 @@ Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang b
 - File berubah: src/tests/flows.test.tsx, src/components/common/Modal.tsx, src/components/crm/{VersionCard,UploadSummaryModal,PublishedConfirmModal}.tsx, src/pages/CrmPageDetailPage.tsx
 - Masalah: test AC-035 menemukan fokus kembali ke input file tersembunyi, bukan ke tombol Upload, karena urutan fokus saat memilih file tidak bisa diandalkan. Modal kini menerima tujuan fokus eksplisit (`returnFocusTo`) dan alur Upload mengirim tombol Upload. Satu test salah selector (nama CRM Page tampil di dua kolom) diperbaiki.
 - Hasil build/test: `npm run build` berhasil; `npm test` 65 test lulus (2 file). Tidak ada hex di luar tokens.css, tidak ada innerHTML/dangerouslySetInnerHTML/iframe.
+
+### Iterasi 5: Validasi di browser, perbaikan tampilan ponsel, dan laporan
+
+- Mulai: 2026-11-21 02:31
+- Selesai: 2026-11-21 02:36
+- Tujuan: memeriksa kriteria manual di browser (simpan prompt dengan keyboard, data tetap setelah reload, simulasi subpath GitHub Pages, sapuan responsif 360/768/1280 px untuk semua halaman dan modal), memperbaiki temuan, lalu menulis TEST-REPORT.md dan COMPLETION-REPORT.md serta keputusan tambahan di DECISIONS.md.
+- File berubah: src/components/common/Modal.tsx, src/styles/global.css, DECISIONS.md, TEST-REPORT.md, COMPLETION-REPORT.md
+- Masalah: di 360px fokus awal MODAL-02 menggulung kotak peringatan keluar layar dan "(Published)" terpotong per huruf; diperbaiki dengan `focus({ preventScroll: true })` dan kolom label tabel ringkasan lebih sempit di ponsel. Screenshot panel browser kadang tertinggal satu langkah, jadi bukti utama diambil lewat pengukuran DOM. AC-039 dan AC-040 ditandai Blocked karena butuh deploy GitHub Pages oleh peneliti (simulasi subpath lokal berhasil). Dev server dan server statis di port 5182 sudah dimatikan.
+- Hasil build/test: `npm test` 65 test lulus; `npm run build` berhasil. Sapuan responsif 39 pemeriksaan tanpa masalah. TEST-REPORT: 42 Pass, 0 Fail, 2 Blocked, 0 Not Tested.

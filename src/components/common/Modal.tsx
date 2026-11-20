@@ -21,7 +21,8 @@ export function Modal({ title, onClose, children, actions, returnFocusTo }: Moda
     const trigger = returnFocusTo ?? (document.activeElement as HTMLElement | null);
     const dialog = dialogRef.current;
     const initial = dialog?.querySelector<HTMLElement>('[data-autofocus]') ?? dialog?.querySelector<HTMLElement>(FOCUSABLE);
-    initial?.focus();
+    // preventScroll: judul dan peringatan tetap terlihat di layar kecil.
+    initial?.focus({ preventScroll: true });
     return () => {
       if (trigger && trigger !== document.body && trigger.isConnected) trigger.focus();
     };

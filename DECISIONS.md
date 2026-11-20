@@ -81,3 +81,13 @@ Tidak ada di luar daftar AGENTS Phase 2. `@types/diff` dipakai hanya untuk tipe 
 
 - Sinkronisasi otomatis pemilih client saat membuka URL detail milik client lain.
 - Tombol unduh isi revisi sebagai file.
+
+## Keputusan tambahan selama implementasi
+
+| No | Hal | Keputusan dan alasan |
+|---|---|---|
+| D-16 | "Dua kolom bila muat" untuk PAGE-04 dan PAGE-05 di tablet (UX-SPEC 7). | Dua kolom mulai 768px. Di 640 s.d. 767px kolom sempit kurang dari 200px sehingga panel audit dan daftar revisi tidak terbaca; di bawah 768px bertumpuk (panel audit di atas form). |
+| D-17 | Pesan bila FileReader gagal membaca file tidak ada di INTERACTION-SPEC. | Toast error "File tidak bisa dibaca. Pilih ulang file dashboard." supaya kegagalan tidak disembunyikan (AGENTS 7). |
+| D-18 | Fokus kembali ke tombol pemicu setelah modal Upload ditutup (DESIGN-SYSTEM 10.3). | Saat dialog file browser dipakai, elemen yang fokus tidak selalu tombol Upload. Modal menerima tujuan fokus eksplisit (`returnFocusTo`), dan alur Upload mengirim tombol Upload kartu itu. |
+| D-19 | Fokus awal modal di layar kecil menggulung kotak peringatan MODAL-02 keluar layar. | Fokus awal memakai `preventScroll` sehingga judul dan peringatan tetap terlihat; input tetap menerima fokus. |
+| D-20 | AC-039 dan AC-040 meminta pengujian dari GitHub Pages, sedangkan agent dilarang push. | Diuji dengan simulasi: hasil build disajikan dari subpath `/autoaudit-ws12-prd-skill/` di server statis lokal. Status di TEST-REPORT ditulis Blocked sampai peneliti men-deploy. |
