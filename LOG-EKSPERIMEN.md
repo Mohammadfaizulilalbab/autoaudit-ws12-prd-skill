@@ -70,3 +70,12 @@ Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang b
 - File berubah: src/types/index.ts, src/store/{seed,storage,actions,selectors}.ts, src/utils/{format,validation,diff,messages}.ts, src/tests/logic.test.ts
 - Masalah: perlu memastikan diff 500 KB tetap cepat untuk file yang sangat berbeda; dipakai `maxEditLength` dengan fallback semua baris ditandai (D-14). Test kinerja lulus. Pemeriksaan tsc pertama gagal karena narrowing tipe snapshot di test; diperbaiki dengan helper bertipe sebelum commit di-amend.
 - Hasil build/test: `npx tsc --noEmit` tanpa error; `vitest run` 32 test lulus.
+
+### Iterasi 3: Token desain, layout, komponen, halaman, dan modal
+
+- Mulai: 2026-11-20 22:08 (terhenti 22:12 karena batas pemakaian API, dilanjutkan 2026-11-21 02:23)
+- Selesai: 2026-11-21 02:28
+- Tujuan: menulis token DESIGN-SYSTEM sebagai CSS custom properties, layout (sidebar, header, drawer di bawah 1024px), komponen dasar (Button, StatusBadge, Modal dengan focus trap, Toast dengan aria-live, EmptyState, DataTable), PAGE-01 s.d. PAGE-05, MODAL-01 s.d. MODAL-04, HashRouter, dan context penyimpanan.
+- File berubah: src/App.tsx, src/main.tsx, src/styles/{tokens,global}.css, src/store/StoreContext.tsx, src/utils/file.ts, src/components/{common,layout,crm,prompts,history}/*, src/pages/*
+- Masalah: (1) tombol menu dan tutup drawer tampil di desktop karena aturan `.btn` menimpa `display:none`; diperbaiki dengan selector lebih spesifik. (2) Modal di dalam sidebar ber-transform akan terkurung di drawer; Modal dirender lewat portal ke body. (3) Fokus tidak kembali ke tombol Upload bila fokus hilang saat dialog file; tombol Upload difokuskan ulang saat file dipilih. (4) `.claude/launch.json` diminta di luar folder kerja, jadi dev server dijalankan manual di port 5182. Diperiksa di browser: Upload v4 Published dengan " V4 " + Enter, pengembalian revisi #1 v4 lewat MODAL-02, Esc menutup modal dan fokus kembali, isi `<script>` tampil sebagai teks tanpa alert, drawer dan modal di 360px, tabel prompt jadi kartu, tanpa scroll horizontal di 360/768/1024px.
+- Hasil build/test: `npm run build` berhasil; `npm test` 32 test lulus (test UI ditulis di iterasi berikutnya).
