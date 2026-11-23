@@ -63,6 +63,20 @@ Atas permintaan pemilik repo (21 November 2026), baris "Co-Authored-By" yang dim
 
 21 November 2026, 02.38 sampai 02.50 WIB, setelah deploy ke GitHub Pages. Agent evaluator terpisah menguji situs A dan B dengan checklist yang sama berdasarkan PRD. Hasil: kriteria penerimaan PRD A 11/11 dan B 11/11, tanpa butir Fail. Skor total A 30 dari 31 dan B 30,5 dari 31. Detail ada di `EVALUASI.md`. Karena tidak ada kriteria PRD yang gagal, peneliti tidak mengirim prompt revisi, sehingga jumlah revisi tetap 0.
 
+### Prompt revisi 1
+
+Waktu dikirim: 2026-11-23 08:34 WIB. Pemilik repo menilai tampilan demo belum mirip AutoAudit asli. Peneliti mengukur tampilan AutoAudit asli (CRM Pages, kartu versi, Saved Prompt, Edit Saved Prompt) dan menuliskannya di `ACUAN-TAMPILAN.md`, tanpa data client. File acuan dan prompt di bawah identik untuk Eksperimen A dan B. Prompt ini dihitung sebagai revisi pertama.
+
+```text
+Revisi 1 dari peneliti. Pemilik produk menilai tampilan aplikasi belum mirip AutoAudit asli. Baca ACUAN-TAMPILAN.md di folder kerja, lalu ubah tampilan aplikasi supaya mengikuti acuan itu. Fitur, alur, validasi, dan teks pesan yang sudah ada tetap dipertahankan; yang berubah hanya tampilan dan tata letak. Jika acuan bertentangan dengan dokumen lain di folder kerja soal warna, tipografi, atau tata letak, ikuti acuan, perbarui dokumen tersebut supaya konsisten, dan catat alasannya.
+
+Aturan eksperimen tetap sama, dengan dua perubahan:
+1. Jangan menambahkan baris Co-Authored-By di pesan commit.
+2. Catat pekerjaan ini sebagai iterasi baru di LOG-EKSPERIMEN.md dengan judul yang diawali "Revisi 1".
+
+Sebelum selesai, pastikan npm test dan npm run build lolos, lalu periksa tampilan di browser pada lebar 360, 768, dan 1280 px. Pesan terakhirmu berisi: ringkasan perubahan, hasil build dan test, serta bagian yang belum sesuai acuan.
+```
+
 ## Iterasi agent
 
 Bagian ini ditulis agent setiap selesai satu iterasi: waktu, tujuan, file yang berubah, masalah, dan hasil build/test.
